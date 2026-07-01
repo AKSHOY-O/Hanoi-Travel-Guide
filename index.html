@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hanoi Business Travel Guide</title>
+<style>
+:root{
+  --bg:#f4f7fb;
+  --surface:#ffffff;
+  --surface2:#f8fbff;
+  --ink:#102033;
+  --muted:#607086;
+  --line:#dbe5ef;
+  --navy:#0b2f66;
+  --blue:#1e66e5;
+  --teal:#0fa3a0;
+  --green:#12a05c;
+  --amber:#f2a900;
+  --red:#e24a4a;
+  --shadow:0 18px 45px rgba(15,23,42,.10);
+  --shadow2:0 8px 24px rgba(15,23,42,.07);
+  --radius:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(30,102,229,.13), transparent 28%),
+    radial-gradient(circle at 100% 8%, rgba(15,163,160,.14), transparent 26%),
+    linear-gradient(180deg,#f5f8fc 0%,#eef4fb 100%);
+}
+a{color:inherit}
+.page{max-width:1320px;margin:0 auto;padding:24px}
+.nav{
+  position:sticky;
+  top:14px;
+  z-index:30;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:12px 14px;
+  border:1px solid rgba(219,229,239,.9);
+  border-radius:22px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  box-shadow:var(--shadow2);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--teal));
+  font-size:22px;
+  box-shadow:0 8px 20px rgba(11,47,102,.18);
+}
+.brand-title{font-weight:950;color:var(--navy);font-size:18px;letter-spacing:-.2px}
+.brand-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{
+  text-decoration:none;
+  padding:9px 11px;
+  border-radius:999px;
+  background:#f2f7ff;
+  border:1px solid #dbe9ff;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:850;
+}
+.hero{
+  margin-top:20px;
+  overflow:hidden;
+  border-radius:34px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+}
+.hero-main{
+  padding:38px;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.96), rgba(255,255,255,.86)),
+    radial-gradient(circle at 92% 18%, rgba(15,163,160,.18), transparent 30%),
+    radial-gradient(circle at 5% 100%, rgba(30,102,229,.13), transparent 28%);
+}
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  color:var(--blue);
+  background:#eef5ff;
+  border:1px solid #d7e6ff;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+}
+h1{
+  margin:18px 0 12px;
+  font-size:58px;
+  line-height:.98;
+  letter-spacing:-2px;
+  color:var(--navy);
+}
+.hero-text{
+  max-width:760px;
+  font-size:18px;
+  line-height:1.65;
+  color:var(--muted);
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+.btn{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-radius:16px;
+  padding:13px 16px;
+  font-weight:900;
+  font-size:14px;
+  border:1px solid transparent;
+}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  box-shadow:0 12px 24px rgba(30,102,229,.22);
+}
+.btn-teal{
+  color:#075f5e;
+  background:#e8fbfa;
+  border-color:#c6efed;
+}
+.btn-light{
+  color:var(--blue);
+  background:#f2f7ff;
+  border-color:#dbe9ff;
+}
+.hero-side{
+  color:#fff;
+  padding:30px;
+  background:
+    linear-gradient(155deg,rgba(7,32,69,.96),rgba(18,93,184,.96) 55%,rgba(15,163,160,.96)),
+    radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 30%);
+  position:relative;
+}
+.hero-side:before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  top:-70px;
+  right:-70px;
+}
+.address-card{
+  position:relative;
+  z-index:1;
+  padding:20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(10px);
+}
+.address-label{
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  opacity:.8;
+}
+.address{
+  margin-top:10px;
+  font-size:22px;
+  line-height:1.4;
+  font-weight:900;
+}
+.side-metrics{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:16px;
+}
+.side-metric{
+  padding:15px;
+  border-radius:18px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.17);
+}
+.side-metric .m-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  font-weight:950;
+  opacity:.8;
+}
+.side-metric .m-value{
+  margin-top:6px;
+  font-size:17px;
+  font-weight:950;
+  line-height:1.3;
+}
+.summary-row{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+}
+.summary-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow2);
+  min-height:132px;
+}
+.summary-icon{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  background:#eef5ff;
+  margin-bottom:12px;
+}
+.summary-label{
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-weight:950;
+}
+.summary-value{
+  margin-top:8px;
+  font-size:18px;
+  line-height:1.35;
+  font-weight:950;
+}
+.section-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+}
+.panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  overflow:hidden;
+}
+.panel-head{
+  padding:18px 22px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,#ffffff,#f5f9ff);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.panel-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:21px;
+  font-weight:950;
+  color:var(--navy);
+}
+.num{
+  min-width:38px;
+  height:38px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  font-weight:950;
+  font-size:14px;
+}
+.panel-body{padding:22px}
+.link-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  padding:10px 12px;
+  border-radius:13px;
+  color:var(--blue);
+  background:#f1f7ff;
+  border:1px solid #d9e8ff;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.link-btn:hover,.nav-links a:hover,.btn:hover{text-decoration:none;filter:brightness(.98)}
+.map-list{display:grid;gap:12px}
+.map-item{
+  display:grid;
+  grid-template-columns:52px 1fr auto;
+  gap:14px;
+  align-items:center;
+  padding:15px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:var(--surface2);
+}
+.map-icon{
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  font-size:24px;
+  background:#eafbfa;
+}
+.map-item h3{margin:0;font-size:16px}
+.map-item p{margin:4px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+.converter{
+  color:#fff;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 28%),
+    linear-gradient(135deg,#081f46 0%,#1550b8 54%,#0f9b8e 100%);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow2);
+  min-height:100%;
+}
+.converter h2{margin:0;font-size:29px;letter-spacing:-.6px}
+.converter p{margin:8px 0 0;line-height:1.55;opacity:.92}
+.currency-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+}
+.currency-field{
+  padding:14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.2);
+}
+.currency-field label{
+  display:block;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-weight:950;
+  opacity:.88;
+}
+.currency-field input{
+  width:100%;
+  margin-top:8px;
+  border:0;
+  border-radius:12px;
+  padding:12px;
+  font-size:18px;
+  font-weight:950;
+  color:#111827;
+}
+.rate-line{
+  margin-top:14px;
+  font-size:14px;
+  line-height:1.5;
+  opacity:.92;
+}
+.refresh{
+  margin-top:14px;
+  border:0;
+  cursor:pointer;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#fff;
+  color:var(--navy);
+  font-weight:950;
+}
+.full{margin-top:18px}
+.table-wrap{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 10px;
+}
+th{
+  text-align:left;
+  padding:0 10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.75px;
+  font-size:12px;
+  font-weight:950;
+}
+td{
+  padding:13px 10px;
+  background:#f9fbfe;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  vertical-align:top;
+}
+td:first-child{
+  border-left:1px solid var(--line);
+  border-radius:16px 0 0 16px;
+  font-weight:900;
+}
+td:last-child{
+  border-right:1px solid var(--line);
+  border-radius:0 16px 16px 0;
+}
+.star{color:var(--amber);font-weight:950}
+.note-box{
+  margin-top:14px;
+  padding:15px 16px;
+  border-radius:18px;
+  background:#f2fbfb;
+  border:1px solid #cdebea;
+  color:#24414b;
+  line-height:1.55;
+  font-size:14px;
+}
+.route-list{display:grid;gap:12px}
+.route-step{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:14px;
+  align-items:flex-start;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface2);
+}
+.route-dot{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#eef5ff;
+  color:var(--blue);
+  font-weight:950;
+}
+.route-k{
+  font-size:12px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-weight:950;
+}
+.route-v{
+  margin-top:5px;
+  font-size:17px;
+  font-weight:900;
+  line-height:1.35;
+}
+.essential-grid{display:grid;gap:12px}
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.check{
+  display:flex;
+  gap:11px;
+  align-items:flex-start;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+}
+.tick{
+  min-width:28px;
+  height:28px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  background:#dcfce7;
+  font-weight:950;
+}
+.check-title{font-weight:900}
+.check-text{margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
+.tips-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.tip-card{
+  padding:18px;
+  border-radius:22px;
+  border:1px solid var(--line);
+}
+.tip-good{background:#f0fdf4;border-color:#b9efcf}
+.tip-warn{background:#fff7ed;border-color:#f7d6a9}
+.tip-card h3{margin:0 0 10px;font-size:18px}
+.tip-card ul{margin:0;padding-left:20px;line-height:1.65}
+.tip-card li{margin:5px 0}
+.em-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.em{
+  padding:18px;
+  border-radius:20px;
+  border:1px solid #fecaca;
+  background:#fff7f7;
+}
+.em-number{
+  font-size:32px;
+  font-weight:950;
+  color:var(--red);
+}
+.em-label{font-weight:900;margin-top:2px}
+.footer{
+  margin:22px 0 4px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media(max-width:1120px){
+  .hero-grid,.section-grid{grid-template-columns:1fr}
+  .summary-row{grid-template-columns:repeat(3,1fr)}
+  .check-grid,.tips-grid,.em-grid{grid-template-columns:1fr}
+}
+@media(max-width:740px){
+  .page{padding:12px}
+  .nav{position:relative;top:auto}
+  .nav-links{display:none}
+  .hero-main,.hero-side{padding:24px}
+  h1{font-size:38px;letter-spacing:-1px}
+  .summary-row{grid-template-columns:1fr}
+  .currency-grid{grid-template-columns:1fr}
+  .map-item{grid-template-columns:48px 1fr}
+  .map-item .link-btn{grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <div class="brand">
+      <div class="logo">✈️</div>
+      <div>
+        <div class="brand-title">Hanoi Business Travel Guide</div>
+        <div class="brand-sub">Premium one-page visitor portal</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#maps">Map Links</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#atm">ATM</a>
+      <a href="#airport">Airport</a>
+      <a href="#essentials">Essentials</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#emergency">Emergency</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="kicker">First-time visitor ready</div>
+        <h1>Hanoi City Travel Guide</h1>
+        <div class="hero-text">
+          A polished business travel page for your Hanoi guest house stay with clickable map links,
+          nearby Indian restaurants, ATM/cash points, airport route, essentials, emergency support,
+          and live VND to INR conversion.
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=98%20Xuan%20Dieu%20Street%2C%20Tu%20Lien%20Ward%2C%20Tay%20Ho%20District%2C%20Hanoi%2C%20Vietnam">📍 Open Guest House Map</a>
+          <a class="btn btn-light" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=98%20Xuan%20Dieu%20Street%2C%20Tay%20Ho%20District%2C%20Hanoi%2C%20Vietnam&destination=Noi%20Bai%20International%20Airport%20(HAN)%2C%20Hanoi%2C%20Vietnam">✈️ Airport Route</a>
+          <a class="btn btn-teal" target="_blank" href="https://www.google.com/maps/search/indian%20restaurant%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">🍴 Indian Food Nearby</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="address-card">
+          <div class="address-label">Guest House Address</div>
+          <div class="address">No. 98 Xuan Dieu Street,<br>Tu Lien Ward, Tay Ho District,<br>Hanoi, Vietnam</div>
+        </div>
+        <div class="side-metrics">
+          <div class="side-metric"><div class="m-label">Area</div><div class="m-value">Tay Ho / West Lake</div></div>
+          <div class="side-metric"><div class="m-label">Airport</div><div class="m-value">Noi Bai Airport</div></div>
+          <div class="side-metric"><div class="m-label">Distance</div><div class="m-value">Approx. 22 km</div></div>
+          <div class="side-metric"><div class="m-label">Best Ride</div><div class="m-value">Grab / Taxi</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="summary-row">
+    <div class="summary-card"><div class="summary-icon">🏠</div><div class="summary-label">Stay</div><div class="summary-value">Guest House</div></div>
+    <div class="summary-card"><div class="summary-icon">📍</div><div class="summary-label">Location</div><div class="summary-value">98 Xuan Dieu, Tay Ho</div></div>
+    <div class="summary-card"><div class="summary-icon">✈️</div><div class="summary-label">Airport</div><div class="summary-value">Noi Bai Intl. Airport</div></div>
+    <div class="summary-card"><div class="summary-icon">🚕</div><div class="summary-label">Transport</div><div class="summary-value">Grab, Taxi, Bus</div></div>
+    <div class="summary-card"><div class="summary-icon">💱</div><div class="summary-label">Currency</div><div class="summary-value">Live VND → INR</div></div>
+    <div class="summary-card"><div class="summary-icon">✅</div><div class="summary-label">Ready For</div><div class="summary-value">First-time visitor</div></div>
+  </section>
+
+  <section class="section-grid">
+    <div class="panel" id="maps">
+      <div class="panel-head">
+        <div class="panel-title"><span class="num">1</span> Essential Map Links</div>
+      </div>
+      <div class="panel-body map-list">
+        <div class="map-item"><div class="map-icon">🏠</div><div><h3>Guest House</h3><p>Open your guest house location directly in Google Maps.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=98%20Xuan%20Dieu%20Street%2C%20Tu%20Lien%20Ward%2C%20Tay%20Ho%20District%2C%20Hanoi%2C%20Vietnam">Open Map</a></div>
+        <div class="map-item"><div class="map-icon">✈️</div><div><h3>Airport Route</h3><p>Route from guest house to Noi Bai International Airport.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=98%20Xuan%20Dieu%20Street%2C%20Tay%20Ho%20District%2C%20Hanoi%2C%20Vietnam&destination=Noi%20Bai%20International%20Airport%20(HAN)%2C%20Hanoi%2C%20Vietnam">Open Route</a></div>
+        <div class="map-item"><div class="map-icon">🏧</div><div><h3>ATM Nearby</h3><p>Live Google Maps search for ATMs near the guest house.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/ATM%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Find ATM</a></div>
+        <div class="map-item"><div class="map-icon">🇮🇳</div><div><h3>Embassy of India</h3><p>Official support map link for Indian travelers.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/Embassy%20of%20India%20Hanoi">Open Map</a></div>
+      </div>
+    </div>
+
+    <div class="converter">
+      <h2>2. Live Currency Converter</h2>
+      <p>Use this for quick VND to INR understanding before paying bills, booking rides, shopping, or withdrawing cash.</p>
+      <div class="currency-grid">
+        <div class="currency-field"><label>Amount in VND</label><input id="vndInput" type="number" value="100000" min="1"></div>
+        <div class="currency-field"><label>Approx. INR</label><input id="inrOutput" type="text" value="Loading..." readonly></div>
+      </div>
+      <div class="rate-line" id="rateLine">Fetching latest exchange rate...</div>
+      <button class="refresh" onclick="loadRate()">Refresh Live Rate</button>
+      <div class="rate-line">Final amount may vary due to forex markup, card charges, GST, or ATM fees.</div>
+    </div>
+  </section>
+
+  <section class="panel full" id="restaurants">
+    <div class="panel-head">
+      <div class="panel-title"><span class="num">3</span> Nearby Indian Restaurants</div>
+      <a class="link-btn" target="_blank" href="https://www.google.com/maps/search/indian%20restaurant%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open All in Maps</a>
+    </div>
+    <div class="panel-body table-wrap">
+      <table>
+        <thead><tr><th>Restaurant</th><th>Address</th><th>Rating</th><th>Best Use</th><th>Map</th></tr></thead>
+        <tbody>
+          <tr><td>Dalcheeni Indian Restaurant</td><td>100 Xuan Dieu, Tay Ho</td><td><span class="star">4.5★</span></td><td>Closest option</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dalcheeni%20Indian%20Restaurant%20100%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+          <tr><td>SHIMLA - Indian Restaurant</td><td>7A, Ngo 40 Xuan Dieu, Tay Ho</td><td><span class="star">4.7★</span></td><td>Lunch / dinner</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=SHIMLA%20Indian%20Restaurant%207A%20Ngo%2040%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+          <tr><td>Kundan Indian Restaurant</td><td>3 Xuan Dieu, Tay Ho</td><td><span class="star">5.0★</span></td><td>Nearby food</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kundan%20Indian%20Restaurant%203%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+          <tr><td>Nan n Kabab Halal Restaurant</td><td>49 Xuan Dieu, Tay Ho</td><td><span class="star">4.4★</span></td><td>Indian and halal</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nan%20n%20Kabab%20Halal%20Restaurant%2049%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">Most options are in the Xuan Dieu / Tay Ho area and are convenient for short walks or quick Grab rides.</div>
+    </div>
+  </section>
+
+  <section class="section-grid">
+    <div class="panel" id="atm">
+      <div class="panel-head">
+        <div class="panel-title"><span class="num">4</span> ATM / Cash Points</div>
+        <a class="link-btn" target="_blank" href="https://www.google.com/maps/search/ATM%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Find More</a>
+      </div>
+      <div class="panel-body table-wrap">
+        <table>
+          <thead><tr><th>ATM</th><th>Location</th><th>Map</th></tr></thead>
+          <tbody>
+            <tr><td>HSBC ATM</td><td>11 Xuan Dieu, Tay Ho</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=HSBC%20ATM%2011%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+            <tr><td>MBBank ATM</td><td>114 Xuan Dieu, Tay Ho</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MBBank%20ATM%20114%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+            <tr><td>Shinhan Bank ATM</td><td>01 Xuan Dieu, Tay Ho</td><td><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shinhan%20Bank%20ATM%2001%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box">Carry some VND cash for local purchases, small shops, and taxi backup. Check withdrawal charges before using an ATM.</div>
+      </div>
+    </div>
+
+    <div class="panel" id="airport">
+      <div class="panel-head"><div class="panel-title"><span class="num">5</span> Airport Access</div></div>
+      <div class="panel-body route-list">
+        <div class="route-step"><div class="route-dot">A</div><div><div class="route-k">From</div><div class="route-v">Guest House – 98 Xuan Dieu, Tay Ho</div></div></div>
+        <div class="route-step"><div class="route-dot">B</div><div><div class="route-k">To</div><div class="route-v">Noi Bai International Airport (HAN)</div></div></div>
+        <div class="route-step"><div class="route-dot">22</div><div><div class="route-k">Distance</div><div class="route-v">Approx. 22 km</div></div></div>
+        <div class="route-step"><div class="route-dot">🚕</div><div><div class="route-k">Best Option</div><div class="route-v">Grab or taxi for fastest and easiest airport travel</div></div></div>
+        <a class="link-btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=98%20Xuan%20Dieu%20Street%2C%20Tay%20Ho%20District%2C%20Hanoi%2C%20Vietnam&destination=Noi%20Bai%20International%20Airport%20(HAN)%2C%20Hanoi%2C%20Vietnam">Open Airport Route</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-grid" id="essentials">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><span class="num">6</span> Transport</div></div>
+      <div class="panel-body map-list">
+        <div class="map-item"><div class="map-icon">🚗</div><div><h3>Grab Car / GrabBike</h3><p>Best for city travel, airport transfer, and restaurant visits.</p></div><a class="link-btn" target="_blank" href="https://www.grab.com/vn/en/transport/">Open</a></div>
+        <div class="map-item"><div class="map-icon">🚕</div><div><h3>Taxi</h3><p>Reliable for airport and city travel. Confirm route on Google Maps.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/taxi%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Find</a></div>
+        <div class="map-item"><div class="map-icon">🚌</div><div><h3>Public Bus / Transit</h3><p>Budget travel option. Use Google Maps transit planning.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=98%20Xuan%20Dieu%20Tay%20Ho%20Hanoi&travelmode=transit">Transit</a></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><span class="num">7</span> Nearby Essentials</div></div>
+      <div class="panel-body map-list">
+        <div class="map-item"><div class="map-icon">💊</div><div><h3>Pharmacy</h3><p>Medicine and urgent health items.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/pharmacy%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></div>
+        <div class="map-item"><div class="map-icon">🛒</div><div><h3>Supermarket</h3><p>Water, snacks, toiletries, and daily items.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/supermarket%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></div>
+        <div class="map-item"><div class="map-icon">📶</div><div><h3>SIM Card / Mobile Data</h3><p>Useful for Google Maps, Grab, and communication.</p></div><a class="link-btn" target="_blank" href="https://www.google.com/maps/search/SIM%20card%20near%2098%20Xuan%20Dieu%20Tay%20Ho%20Hanoi">Open Map</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel full" id="checklist">
+    <div class="panel-head"><div class="panel-title"><span class="num">8</span> First-Time Visitor Checklist</div></div>
+    <div class="panel-body check-grid">
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Save guest house address</div><div class="check-text">Keep the map link in phone notes and WhatsApp.</div></div></div>
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Install Grab app</div><div class="check-text">Best for airport pickup and city travel.</div></div></div>
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Carry some VND cash</div><div class="check-text">Useful for small shops and local expenses.</div></div></div>
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Buy SIM / enable roaming</div><div class="check-text">Internet is needed for maps and ride booking.</div></div></div>
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Keep passport copy</div><div class="check-text">Save digital and printed copies separately.</div></div></div>
+      <div class="check"><div class="tick">✓</div><div><div class="check-title">Check live currency</div><div class="check-text">Use the VND to INR converter before payment.</div></div></div>
+    </div>
+  </section>
+
+  <section class="section-grid">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><span class="num">9</span> Important Travel Tips</div></div>
+      <div class="panel-body tips-grid">
+        <div class="tip-card tip-good">
+          <h3>✅ Do</h3>
+          <ul>
+            <li>Use Grab or trusted taxi services.</li>
+            <li>Keep the guest house address saved on phone.</li>
+            <li>Carry cash plus card backup.</li>
+            <li>Check maps before meetings and restaurant visits.</li>
+            <li>Leave early for airport travel.</li>
+          </ul>
+        </div>
+        <div class="tip-card tip-warn">
+          <h3>⚠️ Don’t</h3>
+          <ul>
+            <li>Do not exchange money without checking the rate.</li>
+            <li>Do not depend only on cash.</li>
+            <li>Do not leave passport carelessly.</li>
+            <li>Do not board unknown rides without route checking.</li>
+            <li>Do not wait until the last minute for airport departure.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="emergency">
+      <div class="panel-head"><div class="panel-title"><span class="num">10</span> Emergency Support</div></div>
+      <div class="panel-body">
+        <div class="em-grid">
+          <div class="em"><div class="em-number">113</div><div class="em-label">Police</div></div>
+          <div class="em"><div class="em-number">114</div><div class="em-label">Fire</div></div>
+          <div class="em"><div class="em-number">115</div><div class="em-label">Ambulance</div></div>
+        </div>
+        <div class="note-box">For official support, use Embassy of India, Hanoi. Keep passport, visa, ticket, insurance, and guest house address saved in your phone and email.</div>
+        <a class="link-btn" target="_blank" href="https://www.google.com/search?q=Vietnam+e-visa+official" style="margin-top:14px">Open Vietnam e-Visa Info</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Final premium clean design with all travel points and clickable links included.</div>
+</div>
+
+<script>
+let rate = null;
+async function loadRate(){
+  const rateLine = document.getElementById("rateLine");
+  try{
+    rateLine.textContent = "Fetching latest exchange rate...";
+    const res = await fetch("https://open.er-api.com/v6/latest/VND");
+    const data = await res.json();
+    if(data && data.rates && data.rates.INR){
+      rate = data.rates.INR;
+      convert();
+      const now = new Date();
+      rateLine.textContent = "Live rate: 1 VND = " + rate.toFixed(6) + " INR | Updated: " + now.toLocaleString();
+    } else {
+      throw new Error("Rate not available");
+    }
+  }catch(e){
+    rate = 0.0036169;
+    convert();
+    rateLine.textContent = "Live rate could not load. Showing fallback approx. 1 VND = 0.0036169 INR. Click refresh when internet is available.";
+  }
+}
+function convert(){
+  const vnd = parseFloat(document.getElementById("vndInput").value || "0");
+  if(rate){
+    document.getElementById("inrOutput").value = "₹ " + (vnd * rate).toLocaleString("en-IN",{maximumFractionDigits:2});
+  }
+}
+document.getElementById("vndInput").addEventListener("input", convert);
+loadRate();
+</script>
+</body>
+</html>
